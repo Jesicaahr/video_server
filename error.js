@@ -19,6 +19,16 @@ const errorHandler = (err, req, res, next) => {
       type: 'Bad Request',
       errors: err.message,
     });
+  } else if (err.name == 'Unauthorized') {
+    return res.status(401).json({
+      type: 'Unauthorized',
+      errors: err.message,
+    });
+  } else if (err.name == 'Forbidden') {
+    return res.status(403).json({
+      type: 'Unauthorized',
+      errors: err.message,
+    });
   }
 };
 

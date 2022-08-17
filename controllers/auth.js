@@ -13,7 +13,7 @@ module.exports = {
       const { password, ...others } = newUser._doc;
 
       res
-        .status(200)
+        .status(201)
         .send({ message: 'Successfully create new user', user: others });
     } catch (err) {
       next(err);
@@ -45,15 +45,12 @@ module.exports = {
         .status(200)
         .json(others);
     } catch (err) {
-      console.log(err);
       next(err);
     }
   },
 
   google: (req, res) => {
     try {
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   },
 };
