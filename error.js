@@ -29,6 +29,11 @@ const errorHandler = (err, req, res, next) => {
       type: 'Unauthorized',
       errors: err.message,
     });
+  } else if (err.name == 'CastError') {
+    return res.status(400).json({
+      type: 'Bad Request',
+      errors: err.message,
+    });
   }
 };
 

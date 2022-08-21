@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema(
     },
     subscribedUsers: {
       type: [String],
-      default: 0,
+      default: [],
     },
   },
   { timestamps: true }
