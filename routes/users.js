@@ -5,16 +5,16 @@ const verifyToken = require('../verifyToken');
 //update a user
 router.put('/:id', verifyToken, userController.update);
 //delete a user
-router.delete('/:id', userController.deleteUser);
+router.delete('/:id', verifyToken, userController.deleteUser);
 //get a user
 router.get('/find/:id', userController.getUser);
 //subscribe a user
-router.put('/sub/:id', userController.subscribe);
+router.put('/sub/:id', verifyToken, userController.subscribe);
 //unsubscribe a user
-router.put('/unsub/:id', userController.unsubscribe);
+router.put('/unsub/:id', verifyToken, userController.unsubscribe);
 //like a video
-router.put('/like/:videoId', userController.like);
+router.put('/like/:videoId', verifyToken, userController.like);
 //dislike a video
-router.put('/dislike/:videoId', userController.dislike);
+router.put('/dislike/:videoId', verifyToken, userController.dislike);
 
 module.exports = router;
