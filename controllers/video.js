@@ -3,8 +3,8 @@ const User = require('../models/User');
 
 module.exports = {
   addVideo: async (req, res, next) => {
+    const newVideo = new Video({ userId: req.currentUser.id, ...req.body });
     try {
-      const newVideo = new Video({ userId: req.currentUser.id, ...req.body });
       const savedVideo = await newVideo.save();
       res.status(201).json(savedVideo);
     } catch (err) {
