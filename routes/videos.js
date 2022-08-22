@@ -18,4 +18,8 @@ router.get('/trend', videoController.getTrendingVideo);
 router.get('/random', videoController.getRandomVideo);
 //get video from subscribed user
 router.get('/sub', verifyToken, videoController.getSubVideo);
+//get video based on tags
+router.get('/tags', videoController.getByTags);
+//get video based on title/ desc
+router.get('/search', videoController.searchVideo);
 module.exports = router;

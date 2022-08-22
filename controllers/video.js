@@ -1,5 +1,6 @@
 const Video = require('../models/Video');
 const User = require('../models/User');
+
 module.exports = {
   addVideo: async (req, res, next) => {
     try {
@@ -113,6 +114,26 @@ module.exports = {
       res
         .status(200)
         .json(list.flat().sort((a, b) => b.createdAt - a.createdAt));
+    } catch (err) {
+      next(err);
+    }
+  },
+  getByTags: async (req, res, next) => {
+    const tags = req.query.tags.split(',');
+    try {
+      const videos = await Video.find({ tags: { $in: tags } }).limit(20);
+      res.status(200).json(videos);
+    } catch (err) {
+      next(err);
+    }
+  },
+  searchVideo: async (req, res, next) => {
+    const query = req.query.q;
+    try {
+      const videos = await Video.find({
+        title: { $regex: query, $options: 'i' },
+      }).limit(20);
+      res.status(200).json(videos);
     } catch (err) {
       next(err);
     }

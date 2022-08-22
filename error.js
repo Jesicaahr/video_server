@@ -34,6 +34,11 @@ const errorHandler = (err, req, res, next) => {
       type: 'Bad Request',
       errors: err.message,
     });
+  } else {
+    return res.status(500).json({
+      type: 'Internal Server Error',
+      errors: err.message,
+    });
   }
 };
 
