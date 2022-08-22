@@ -16,7 +16,6 @@ module.exports = {
     try {
       const video = await Video.findById(req.params.videoId);
       const comment = await Comment.findById(req.params.id);
-      console.log(comment);
       if (req.params.videoId !== comment.videoId) {
         return next({
           name: 'Bad Request',
