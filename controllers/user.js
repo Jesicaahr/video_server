@@ -125,7 +125,6 @@ module.exports = {
       });
       res.status(200).json({ message: 'The video has been liked' });
     } catch (err) {
-      console.log(err);
       next(err);
     }
   },

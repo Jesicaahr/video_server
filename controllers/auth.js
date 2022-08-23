@@ -25,14 +25,14 @@ module.exports = {
       const user = await User.findOne({ email: req.body.email });
       if (!user) {
         return next({
-          name: 'Bad Request',
+          name: 'Unauthorized',
           message: 'Invalid email/password',
         });
       }
       const isCorrect = await bcrypt.compare(req.body.password, user.password);
       if (!isCorrect) {
         return next({
-          name: 'Bad Request',
+          name: 'Unauthorized',
           message: 'Invalid email/password',
         });
       }

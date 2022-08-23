@@ -8,9 +8,11 @@ const videoRouter = require('./routes/videos');
 const commentRouter = require('./routes/comments');
 const errorHandler = require('./error');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const app = express();
 dotenv.config();
+app.use(cors());
 
 const connect = () => {
   mongoose
