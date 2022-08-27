@@ -8,6 +8,6 @@ router.post('/signup', authController.signup);
 router.post('/signin', authController.signin);
 
 //GOOGLE AUTH
-router.post('/google', authController.google);
+router.post('/google', authController.googleAuth);
 
 module.exports = router;

@@ -37,20 +37,55 @@ module.exports = {
         });
       }
 
-      const token = jwt.sign({ id: user._id }, process.env.SECRET);
-      const { password, ...others } = user._doc;
+      const token = jwt.sign({ d: user._id }, process.env.SECRET);
+      // const { password, ...others } = user._doc;
+      const data = {
+        name: user.name,
+        email: user.email,
+        img: user.img,
+        access_token: token,
+      };
 
       res
-        .cookie('access_token', token, { httpOnly: true })
+        // .cookie('access_token', token, { httpOnly: true })
         .status(200)
-        .json(others);
+        // .json({ others, access_token: token });
+        .json(data);
     } catch (err) {
       next(err);
     }
   },
 
-  google: (req, res) => {
+  googleAuth: async (req, res, net) => {
     try {
-    } catch (err) {}
+      const user = await User.findOne({ email: req.body.email });
+      if (user) {
+        const token = jwt.sign({ id: user._id }, process.env.SECRET);
+
+        const data = {
+          name: user.name,
+          email: user.email,
+          img: user.img,
+          access_token: token,
+        };
+
+        res.status(200).json(data);
+      } else {
+        const newUser = new User({ ...req.body, fromGoogle: true });
+        const savedUser = await newUser.save();
+        const token = jwt.sign({ id: savedUser._id }, process.env.SECRET);
+
+        const data = {
+          name: savedUser.name,
+          email: savedUser.email,
+          img: savedUser.img,
+          access_token: token,
+        };
+
+        res.status(200).json(data);
+      }
+    } catch (err) {
+      next(err);
+    }
   },
 };
